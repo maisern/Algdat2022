@@ -1,2 +1,3 @@
-# Algdat2021
-projects in "Algoritmer og datastrukturer" 2021
+# Algdat2022
+prosjekter i "Algoritmer og datastrukturer" 2022
+Mai-Lise
