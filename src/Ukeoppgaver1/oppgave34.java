@@ -2,7 +2,7 @@ package Ukeoppgaver1;
 
 import java.util.Arrays;
 
-public class oppgave1 {
+public class oppgave34 {
 
     public static void main(String[] args) {
 
@@ -63,8 +63,8 @@ public class oppgave1 {
         }
         return sum;
     }
-    //1.1.5.1
 
+    //1.1.5.1
     public static int maks(int[] a)  // versjon 3 av maks-metoden
     {
         int sist = a.length - 1;       // siste posisjon i tabellen

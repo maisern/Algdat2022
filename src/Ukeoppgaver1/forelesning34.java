@@ -1,7 +1,7 @@
 package Ukeoppgaver1;
 import java.util.Random;
 
-public class forelesning1 {
+public class forelesning34 {
     public static void main(String[] args) {
 
         int[] a =new int[100]; //definerer array med lengde
