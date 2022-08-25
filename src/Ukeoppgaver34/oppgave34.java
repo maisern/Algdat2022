@@ -1,6 +1,4 @@
-package Ukeoppgaver1;
-
-import java.util.Arrays;
+package Ukeoppgaver34;
 
 public class oppgave34 {
 
@@ -88,4 +86,7 @@ public class oppgave34 {
                 }
             }
     } // maks
+
+    //1.1.10.1
+
 }
