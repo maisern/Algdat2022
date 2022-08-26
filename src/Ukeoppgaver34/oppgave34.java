@@ -1,5 +1,9 @@
 package Ukeoppgaver34;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.Random;
+
 public class oppgave34 {
 
     public static void main(String[] args) {
@@ -14,9 +18,10 @@ public class oppgave34 {
 
         // 1.1.10.1:
         // main-metoden i class Program skal nå inneholde:
-        int n = 100_000, antall = 2_000; // tabellstørrelse og gjentagelser
+        int n = 10000, antall = 2000; // tabellstørrelse og gjentagelser
         long tid = 0;                    // for tidsmåling
-        int a[] = forelesning34.array(10000,10000);
+        int a[] = randPerm(n);
+        //System.out.println(Arrays.toString(a));
 
         tid = System.currentTimeMillis();    // leser av klokken
         for (int i = 0; i < antall; i++) kostnader(a);
@@ -57,15 +62,15 @@ public class oppgave34 {
     //1.1.4
     public static int maks2(int[] a)   // versjon 2 av maks-metoden
     {
-        int m = 0;               // indeks til største verdi
+        int maxindex = 0;               // indeks til største verdi
         int maksverdi = a[0];    // største verdi
 
         for (int i = 1; i < a.length; i++) if (a[i] > maksverdi)
         {
             maksverdi = a[i];     // største verdi oppdateres
-            m = i;                // indeks til største verdi oppdateres
+            maxindex = i;                // indeks til største verdi oppdateres
         }
-        return m;   // returnerer indeks/posisjonen til største verdi
+        return maxindex;   // returnerer indeks/posisjonen til største verdi
 
     } // maks
 
@@ -112,8 +117,7 @@ public class oppgave34 {
         int temp = a[sist];            // tar vare på siste verdi
         a[sist] = 0x7fffffff;          // legger tallet 2147483647 sist
 
-        for (int i = 0; ; i++)         // i starter med 0
-            if (a[i] >= maksverdi)       // denne blir sann til slutt
+        for (int i = 0; ; i++)  if (a[i] >= maksverdi)       // denne blir sann til slutt
             {
                 if (i == sist)             // sjekker om vi er ferdige
                 {
@@ -126,7 +130,8 @@ public class oppgave34 {
                     m = i;                   // m oppdateres
                 }
             }
-    } // maks
+    }
+
 
     //1.1.10.1
     public static int kostnader(int[] a)  // legges i class Program
@@ -135,4 +140,29 @@ public class oppgave34 {
         for (int i = 1; i < a.length; i++) {}  // en tom blokk
         return m;
     }
+
+
+    //metode som lager en tilfeldig permutasjon med n tall
+    public static int[]randPerm(int n){
+        if(n<0){
+            throw new java.util.NoSuchElementException("n kan ikke være negativ");
+            }
+        Random r = new Random();
+        int[]a = new int[n];
+        for(int i=0;i<n;i++){
+            int tall = r.nextInt(n);
+            boolean exist=false;
+            for (int j=0;j<i;j++){
+                if(a[j]==tall){
+                    exist=true;
+                    i--;
+                }
+            }
+            if(!exist){
+                a[i]=tall;
+            }
+        }
+        return a;
+    }
+
 }
