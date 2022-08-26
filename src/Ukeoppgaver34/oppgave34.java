@@ -1,5 +1,7 @@
 package Ukeoppgaver34;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -18,10 +20,25 @@ public class oppgave34 {
 
         // 1.1.10.1:
         // main-metoden i class Program skal nå inneholde:
-        int n = 10000, antall = 2000; // tabellstørrelse og gjentagelser
+        int n = 6, antall = 1000; // tabellstørrelse og gjentagelser
         long tid = 0;                    // for tidsmåling
-        int a[] = randPerm(n);
-        //System.out.println(Arrays.toString(a));
+        int a[] = randPerm2(n);
+        System.out.println(Arrays.toString(randPerm2(n)));
+
+        /*
+
+        ////// TIDMÅLINGER ///////
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) {randPerm(n);}
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("randPerm bruker " + tid + " millisek");
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) { randPerm2(n);}
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("randPerm2 bruker " + tid + " millisekunder");
+
 
         tid = System.currentTimeMillis();    // leser av klokken
         for (int i = 0; i < antall; i++) kostnader(a);
@@ -42,7 +59,10 @@ public class oppgave34 {
         for (int i = 0; i < antall; i++) maks3(a);  // Programkode 1.1.5
         tid = System.currentTimeMillis() - tid;     // medgått tid
         System.out.println("Maks3-metoden: " + tid + " millisek");
-        }
+
+
+         */
+}//main
 
 
     //1.1.2
@@ -144,11 +164,11 @@ public class oppgave34 {
 
     //metode som lager en tilfeldig permutasjon med n tall
     public static int[]randPerm(int n){
-        if(n<0){
-            throw new java.util.NoSuchElementException("n kan ikke være negativ");
-            }
+
+        if(n<0) {throw new java.util.NoSuchElementException("n kan ikke være negativ");}
         Random r = new Random();
         int[]a = new int[n];
+
         for(int i=0;i<n;i++){
             int tall = r.nextInt(n);
             boolean exist=false;
@@ -158,9 +178,22 @@ public class oppgave34 {
                     i--;
                 }
             }
-            if(!exist){
-                a[i]=tall;
-            }
+            if(!exist) {a[i]=tall;}
+        }
+        return a;
+    }
+
+    //lager en tilfeldig permuntasjon av n tall
+    //mye mer effektiv
+    public static int [] randPerm2(int n){
+        if(n<0){throw new java.util.NoSuchElementException("n kan ikke være negativ");}
+        Random r = new Random();
+        int[]a=new int[n];
+
+        for( int i=0;i<n;i++){
+            int tall = r.nextInt(n);
+            if(a[tall]==0) {a[tall] = i;
+            }else {i--;}
         }
         return a;
     }
