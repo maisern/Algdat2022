@@ -28,7 +28,6 @@ public class forelesning34 {
                     j++;
                 }
             }
-
             if (!eksisterer) { //legger til tallet om det ikke eksisterer
                 a[i] = tall;
             } else{ //dersom tallet eksisterer minskes i med 1 for å finne en ny verdi.
@@ -43,9 +42,9 @@ public class forelesning34 {
         int max=a[0];
         int endringer=0;
 
-        for (int i=0; i<a.length;i++){
-            if(a[i]>max){
-                max=a[i];
+        for (int j : a) {
+            if (j > max) {
+                max = j;
                 endringer++;
             }
         }
@@ -55,35 +54,35 @@ public class forelesning34 {
     //metode som returnerer index til største tall i et halvåpent intervall
     public static int maks(int[]a, int f, int t){
         int max=a[f];
-        int maxi=f;
+        int maxp=f;
         for(int i=f; i<t;i++){
             if (a[i]>max){
                 max=a[i];
-                maxi=i;
+                maxp=i;
             }
         }
-        return maxi;
+        return maxp;
     }
 
     //metode som bytter plass på to tall
-    public static void bytt(int[]a,int i, int j){
+    public static void bytt(int[]a,int i, int maxp){
         int temp =a[i];
-        a[i]=a[j];
-        a[j]=temp;
+        a[i]=a[maxp];
+        a[maxp]=temp;
     }
 
 
     //main-metoden
     public static void main(String[] args) {
 
-        int[] a = array(10,10);
+        int[] a = array(20,20);
         //skriver ut array før sortering
         System.out.println(Arrays.toString(a));
 
-        //sorterer arrayet MEN trenger litt fix
+        //sorterer arrayet
         for (int k = a.length-1; k > 0; k--) {
-            int max = maks(a, 0, k);
-            bytt(a,k, max);
+            int maxp = maks(a, 0, k+1);
+            bytt(a,k, maxp);
         }
 
         //skriver ut array etter sortering
