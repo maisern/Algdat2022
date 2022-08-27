@@ -1,7 +1,5 @@
 package Ukeoppgaver34;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -20,15 +18,28 @@ public class oppgave34 {
 
         // 1.1.10.1:
         // main-metoden i class Program skal nå inneholde:
-        int n = 6, antall = 1000; // tabellstørrelse og gjentagelser
-        long tid = 0;                    // for tidsmåling
-        int a[] = randPerm2(n);
-        System.out.println(Arrays.toString(randPerm2(n)));
+        int n = 1000, antall = 1000; // tabellstørrelse og gjentagelser
+        long tid;                    // for tidsmåling
+        //int []a = randPerm2(n);
+        //System.out.println(Arrays.toString(randPerm2(n)));
+        //int[]a=randArray(10,0,10);
+        //System.out.println(Arrays.toString(a));
+        //sort1(a);
+        //System.out.println(Arrays.toString(a));
 
-        /*
+
 
         ////// TIDMÅLINGER ///////
 
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) {
+            int []a = randPerm2(n);
+            sort1(a);
+        }
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("randPerm2 og sort bruker " + tid + " millisek");
+
+        /*
         tid = System.currentTimeMillis();
         for (int i = 0; i < antall; i++) {randPerm(n);}
         tid = System.currentTimeMillis() - tid;
@@ -94,6 +105,20 @@ public class oppgave34 {
 
     } // maks
 
+    public static int min(int[]a, int start){
+        int minindex=start;
+        int min=a[minindex];
+
+        for(int i=start;i<a.length;i++){
+            if(a[i]<min){
+                minindex=i;
+                min=a[minindex];
+            }
+        }
+        return minindex;
+
+    }
+
 
     //1.1.3.5
     public static int[] minmax(int[] a){
@@ -154,12 +179,18 @@ public class oppgave34 {
 
 
     //1.1.10.1
+    /*
     public static int kostnader(int[] a)  // legges i class Program
     {
         int m = 0;
         for (int i = 1; i < a.length; i++) {}  // en tom blokk
         return m;
     }
+
+     */
+
+
+    ///// BARE FOR GØY /////
 
 
     //metode som lager en tilfeldig permutasjon med n tall
@@ -198,4 +229,32 @@ public class oppgave34 {
         return a;
     }
 
+    //Metode som lager et tilfeldig array med gitt maks og min-grenser og gitt lengde.
+    public static int[] randArray(int min, int max,int lengde){
+        if(lengde<0) {throw new java.util.NoSuchElementException("lengden kan ikke være negativ");}
+        if(max<min) {throw new java.util.NoSuchElementException("Max må være minst like stor som min");}
+
+        Random r = new Random();
+        int [] array= new int[lengde];
+        for(int i=0;i<lengde;i++){
+            int tall= r.nextInt(max-min+1)+min;
+            array[i]=tall;
+        }
+        return array;
+    }
+
+    //metode som sorterer et array i stigende rekkefølge
+    public static void sort1(int[]a){
+        for (int i=0;i<a.length;i++){
+            int min=min(a,i);
+            bytt(min,i,a);
+        }
+    }
+
+    //metode som bytter plass på to verdier i et array
+    public static void bytt(int b, int c, int[] a){
+        int temp=a[c];
+        a[c]=a[b];
+        a[b]=temp;
+    }
 }
