@@ -5,13 +5,28 @@ import java.util.Random;
 
 public class Oppgave35 {
 
+    /*
     public static void main(String[] args) {
         int[]array = randArray(0,10,10);
         System.out.println(Arrays.toString(array));
         System.out.println("Det nest største tallet er: " + nestS(array));
     }
+    */
 
-    ///// TJUVSTART /////
+
+
+        public static void main(String [] args)      // hovedprogram
+        {
+            int[] a = Tabell.randPerm(20);              // en tilfeldig tabell
+            for (int k : a) System.out.print(k + " ");  // skriver ut a
+
+            int m = Tabell.maks(a);   // finner posisjonen til største verdi
+
+            System.out.println("\nStørste verdi ligger på plass " + m);
+
+        } // main
+
+
 
     //metode som returnerer det nest største tallet
     public static int nestS (int[]a){
