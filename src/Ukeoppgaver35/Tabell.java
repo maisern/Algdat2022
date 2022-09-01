@@ -42,10 +42,11 @@ public class Tabell {
     // Metoden maks(int[] a, int fra, int til)   Programkode 1.2.1 b)
     public static int maks(int[] a, int fra, int til)
     {
-        fratilKontroll(a.length,fra,til);
         if (fra == til)
             throw new NoSuchElementException
                     ("fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!");
+        fratilKontroll(a.length,fra,til);
+
 
 
         int m = fra;              // indeks til største verdi i a[fra:til>
@@ -94,13 +95,16 @@ public class Tabell {
     }
 
     public static void skriv(int[] a, int fra, int til){
+        fratilKontroll(a.length,fra,til);
         for(int i=fra;i<til-1;i++){
             System.out.print(a[i]+" ");
         }
         System.out.print(a[til-1]);
     }
 
+
     public static void skriv(int[] a){
+        fratilKontroll(a.length,0,a.length);
         for (int i : a) {
             System.out.print(i + " ");
         }
@@ -108,15 +112,17 @@ public class Tabell {
     }
 
     public static void skrivln(int[] a, int fra, int til){
+        fratilKontroll(a.length,fra,til);
         for(int i=fra;i<til;i++){
             System.out.print(a[i]+" ");
         }
         System.out.println();
     }
 
-    public static void skrivlv(int[] a){
-        for(int i=0;i<a.length;i++){
-            System.out.print(a[i]+" ");
+    public static void skrivln(int[] a){
+        fratilKontroll(a.length,0,a.length);
+        for (int j : a) {
+            System.out.print(j + " ");
         }
         System.out.println();
 
@@ -124,9 +130,22 @@ public class Tabell {
 
     //sjekker at intervallet er ok
     public static void fratilKontroll(int tablengde, int fra, int til) {
-        if (fra < 0 || til > tablengde || fra >= til)
-            throw new IllegalArgumentException("Illegalt intervall!");
+        if (tablengde==0){
+            throw new ArrayIndexOutOfBoundsException
+                    ("tabellen er tom!");
+        }
 
+        if (fra < 0)                                  // fra er negativ
+            throw new ArrayIndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
+
+        if (til > tablengde)                          // til er utenfor tabellen
+            throw new ArrayIndexOutOfBoundsException
+                    ("til(" + til + ") > tablengde(" + tablengde + ")");
+
+        if (fra > til)                                // fra er større enn til
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
     }
     public static void vhKontroll(int tablengde, int v, int h)
     {
@@ -160,4 +179,34 @@ public class Tabell {
             }
         }
     }
+
+    public static int[] nestMaks(int[] a)  // legges i class Tabell
+    {
+        int n = a.length;   // tabellens lengde
+
+        if (n < 2) throw   // må ha minst to verdier!
+                new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = maks(a);  // m er posisjonen til tabellens største verdi
+
+        int nm;           // nm skal inneholde posisjonen til nest største verdi
+
+        if (m == 0)                            // den største ligger først
+        {
+            nm = maks(a, 1, n);                  // leter i a[1:n>
+        }
+        else if (m == n - 1)                   // den største ligger bakerst
+        {
+            nm = maks(a, 0, n - 1);              // leter i a[0:n-1>
+        }
+        else
+        {
+            int mv = maks(a, 0, m);              // leter i a[0:m>
+            int mh = maks(a, m + 1, n);          // leter i a[m+1:n>
+            nm = a[mh] > a[mv] ? mh : mv;        // hvem er størst?
+        }
+
+        return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
+
+    } // nestMaks
 }
