@@ -4,6 +4,8 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class Tabell {
+
+
     private Tabell() {}   // privat standardkonstruktør - hindrer instansiering
 
     // Metoden bytt(int[] a, int i, int j)       Programkode 1.1.8 d)
@@ -105,8 +107,8 @@ public class Tabell {
 
     public static void skriv(int[] a){
         fratilKontroll(a.length,0,a.length);
-        for (int i : a) {
-            System.out.print(i + " ");
+        for (int i=0;i<a.length-1;i++) {
+            System.out.print(a[i] + " ");
         }
         System.out.print(a[a.length-1]);
     }
@@ -122,7 +124,7 @@ public class Tabell {
     public static void skrivln(int[] a){
         fratilKontroll(a.length,0,a.length);
         for (int j : a) {
-            System.out.print(j + " ");
+            System.out.print(a[j] + " ");
         }
         System.out.println();
 
@@ -180,6 +182,9 @@ public class Tabell {
         }
     }
 
+
+
+    //1.2.4.1
     public static int[] nestMaks(int[] a)  // legges i class Tabell
     {
         int n = a.length;   // tabellens lengde
@@ -209,4 +214,54 @@ public class Tabell {
         return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
 
     } // nestMaks
+
+
+    //1.2.4.2
+    public static int[] nestMaks2(int[] a)  // legges i class Tabell
+    {
+        int n = a.length;   // tabellens lengde
+
+        if (n < 2) throw   // må ha minst to verdier!
+                new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = maks(a);  // m er posisjonen til tabellens største verdi
+        bytt(a,m,0);
+        int nm = maks(a,1, n);
+        if(m==nm){
+            nm=0;
+        }
+        bytt(a,m,0);
+        return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
+
+    } // nestMaks
+
+
+    //1.2.4.3
+    public static int[] nestMaks3(int[] a)  // legges i class Tabell
+    {
+        int n = a.length;   // tabellens lengde
+
+        if (n < 2) throw   // må ha minst to verdier!
+                new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = maks(a);  // m er posisjonen til tabellens største verdi
+        bytt(a,m,n-1);
+        int nm = maks(a,0, n-1);
+        if(m==nm){
+            nm=n-1;
+        }
+        bytt(a,m,n-1);
+        return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
+
+    } // nestMaks
+
+    //1.2.4.4
+    public static void sortering(int[]a){
+        for (int i=a.length-1;i>1;i--){
+            int m = maks(a,0,i+1);
+            bytt(a,m,i);
+        }
+    }
+
+
 }
