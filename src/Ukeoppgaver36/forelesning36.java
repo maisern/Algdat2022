@@ -10,8 +10,7 @@ public class forelesning36 {
         int six = partisjonering(a,p);
         byttPiviotBakerst(a,six);
 
-
  */
-    }
 
+    }
 }
