@@ -1,63 +1,67 @@
-package Ukesoppgaver37;
+package Ukeoppgaver37;
 
-public class forelesning37 {
+public class JavaGenerics {
 
     public static void main(String[] args) {
-        for(int i=0;i<1;i++){
+        for (int i = 0; i < 1; i++) {
             System.out.println(simpleIntervalCheck(i));
             System.out.println(ternaryIntervalCheck(i));
         }
 
-        Character [] b= {'b','f', 'w'};
+        Character[] b = {'b', 'f', 'w'};
         System.out.println(maks(b));
 
-        String[] s={"A" + "er" + "kjempe"};
+        String[] s = {"A" + "er" + "kjempe"};
         System.out.println(maks(s));
 
         Pokemon[] pokemons = {
                 new Pokemon("pikachu", 34, 100),
                 new Pokemon("Bulbasor", 2, 90),
-                new Pokemon("Onix", 34,100)
+                new Pokemon("Onix", 34, 100)
         };
 
         System.out.println();
         System.out.println("Jeg velger: ");
 
-        for ( Pokemon p: pokemons){
+        for (Pokemon p : pokemons) {
             System.out.println(p);
 
         }
-        System.out.println(pokemons[maks(pokemons)]+ " Jeg velger deg");
+        System.out.println(pokemons[maks(pokemons)] + " Jeg velger deg");
+
+
     } //main
 
 
-    public static int simpleIntervalCheck(int x){
-        if(x<0){
+    public static int simpleIntervalCheck(int x) {
+        if (x < 0) {
             return -1;
-        }else{
+        } else {
             return 1;
         }
     }
 
-    public static int ternaryIntervalCheck(int x){
+    public static int ternaryIntervalCheck(int x) {
         return (x < 0) ? -1 : 1;
     }
 
 
-    // alle klasser som kan sammenliknes
-    public static <T extends Comparable<? super T>>int maks(T[]x){
+    // maksmetode som fungerer for alle datatyper som støtter copareble (f.eks. Integer ikke int)
+    public static <T extends Comparable<? super T>> int maks(T[] x) {
 
-        T max=x[0];
-        int m=0;
-        for (int i=1; i<x.length;i++){
-            if (x[i].compareTo(max)>0){
-                max=x[i];
-                m=i;
+        T max = x[0];
+        int m = 0;
+        for (int i = 1; i < x.length; i++) {
+            if (x[i].compareTo(max) > 0) {
+                max = x[i];
+                m = i;
             }
         }
 
         return m;
     }
+
+
 
     public static class Pokemon implements Comparable<Pokemon>{
         String name;
