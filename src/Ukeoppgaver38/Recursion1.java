@@ -1,5 +1,9 @@
 package Ukeoppgaver38;
 
+import Ukeoppgaver35.Tabell;
+
+import java.util.Arrays;
+
 public class Recursion1 {
 
     /*//// Rekursjon
@@ -24,9 +28,18 @@ public class Recursion1 {
          */
 
 
-        // Rekursivt binærsøk
-        int[] a = {0, 2, 12, 21, 32, 36, 37, 99 };
-        System.out.println(binarySearch(a,1,0,a.length-1));
+        int [] b = {1,2,3,4,5,6,7,8,99};
+
+        int row = 3;
+        int col = 3;
+
+        //matrise
+        int [][] a = {
+                {1,2,3},
+                {4,5,6},
+                {7,8,99}
+        };
+
 
         /*
         for(int i: a){
@@ -54,7 +67,6 @@ public class Recursion1 {
         return n*faktorial(n-1);
     }
 
-
     public static int binarySearch (int[] a, int verdi, int v, int h) {
 
         if (v == h) {
@@ -69,8 +81,29 @@ public class Recursion1 {
         return -v-1;
     }
 
+    //for å slippe å initiere k i main
+    public static void permutasjon(int[] x){
+        for (int i=0; i< x.length; i++){
+            Tabell.bytt(x,i,0);
+            permutasjon(x,1);
+            Tabell.bytt(x,0,i);
+        }
+    }
 
+    public static void permutasjon(int[] x, int k){
+        if (k == x.length) System.out.println(Arrays.toString(x));
 
+        for (int i=k; i< x.length; i++){
+            Tabell.bytt(x,i,k);
+            permutasjon(x,k+1);
+            Tabell.bytt(x,k,i);
+        }
+    }
 
-
+    public static void hanoiTower(int a, int b, int c, int lengde){
+        if(lengde==0) return;
+        hanoiTower(a,b,c, lengde-1);
+        //flytt dederste fra a til c
+        //hanoiTower(a,b,c,);
+    }
 }

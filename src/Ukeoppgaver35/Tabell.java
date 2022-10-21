@@ -1,5 +1,6 @@
 package Ukeoppgaver35;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -104,7 +105,6 @@ public class Tabell {
         System.out.print(a[til-1]);
     }
 
-
     public static void skriv(int[] a){
         fratilKontroll(a.length,0,a.length);
         for (int i=0;i<a.length-1;i++) {
@@ -182,8 +182,6 @@ public class Tabell {
         }
     }
 
-
-
     //1.2.4.1
     public static int[] nestMaks(int[] a)  // legges i class Tabell
     {
@@ -214,7 +212,6 @@ public class Tabell {
         return new int[] {m,nm};      // m i posisjon 0 , nm i posisjon 1
 
     } // nestMaks
-
 
     //1.2.4.2
     public static int[] nestMaks2(int[] a)  // legges i class Tabell
@@ -277,19 +274,6 @@ public class Tabell {
         return m;     // returnerer posisjonen til største verdi
     }
 
-    public static int maks(String[] a)    // legges i class Tabell
-    {
-        int m = 0;                          // indeks til største verdi
-        String maksverdi = a[0];            // største verdi
-
-        for (int i = 1; i < a.length; i++) if (a[i].compareTo(maksverdi) > 0)
-        {
-            maksverdi = a[i];  // største verdi oppdateres
-            m = i;             // indeks til største verdi oppdaters
-        }
-        return m;  // returnerer posisjonen til største verdi
-    }
-
     public static int maks(char[] a)     // legges i class Tabell
     {
         int m = 0;                           // indeks til største verdi
@@ -303,6 +287,52 @@ public class Tabell {
         return m;     // returnerer posisjonen til største verdi
     }
 
+    public static <T extends Comparable<? super T>> int maks(T[] a)
+    {
+        int m = 0;                     // indeks til største verdi
+        T maksverdi = a[0];            // største verdi
 
+        for (int i = 1; i < a.length; i++) if (a[i].compareTo(maksverdi) > 0)
+        {
+            maksverdi = a[i];  // største verdi oppdateres
+            m = i;             // indeks til største verdi oppdaters
+        }
+        return m;  // returnerer posisjonen til største verdi
+    } // maks
+
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a)
+    {
+        for (int i = 1; i < a.length; i++)  // starter med i = 1
+        {
+            T verdi = a[i];        // verdi er et tabellelemnet
+            int  j = i - 1;        // j er en indeks
+            // sammenligner og forskyver:
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0 ; j--) a[j+1] = a[j];
+
+            a[j + 1] = verdi;      // j + 1 er rett sortert plass
+        }
+    }
+
+    public static void bytt(Object[] a, int i, int j)
+    {
+        Object temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    public static Integer[] randPermInteger(int n)
+    {
+        Integer[] a = new Integer[n];               // en Integer-tabell
+        Arrays.setAll(a, i -> i + 1);               // tallene fra 1 til n
+
+        Random r = new Random();   // hentes fra  java.util
+
+        for (int k = n - 1; k > 0; k--)
+        {
+            int i = r.nextInt(k+1);  // tilfeldig tall fra [0,k]
+            bytt(a,k,i);             // bytter om
+        }
+        return a;  // tabellen med permutasjonen returneres
+    }
 
 }
