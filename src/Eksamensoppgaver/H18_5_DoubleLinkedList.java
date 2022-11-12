@@ -84,11 +84,11 @@ public class H18_5_DoubleLinkedList {
             if(this.size==1){
                 start=end=null;
             }
-            else if(q.prev==null){
+            else if(q==start){
                 q.next.prev=null;
                 start=q.next;
 
-            }else if(q.next==null){
+            }else if(q==end){
                 q.prev.next=null;
                 end=q.prev;
             }else{
@@ -96,6 +96,7 @@ public class H18_5_DoubleLinkedList {
                 q.next.prev=q.prev;
 
             }
+            this.size--;
         }
 
         /**

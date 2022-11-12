@@ -4,6 +4,7 @@ package Eksamensforberedelse;
 import java.util.Arrays;
 
 public class Heap {
+    /*
 
     private Data3[] theHeap;
 
@@ -329,5 +330,7 @@ class ww44Data3 {
         return Integer.toString(key);
 
     }
+
+     */
 
 }
