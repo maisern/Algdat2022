@@ -314,7 +314,7 @@ public class Heap {
     }
 }
 
-class Data3 {
+class ww44Data3 {
 
     public int key;
 
