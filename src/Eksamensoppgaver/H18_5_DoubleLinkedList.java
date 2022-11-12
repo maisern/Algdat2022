@@ -66,7 +66,7 @@ public class H18_5_DoubleLinkedList {
          * @param index Indexen å fjerne
          */
         void remove(int index) {
-            if(index >= this.size){
+            if(index >= this.size || index<0){
                 throw new IndexOutOfBoundsException();
             }
             Node n = start;
@@ -96,6 +96,7 @@ public class H18_5_DoubleLinkedList {
                 q.next.prev=q.prev;
 
             }
+            q=null;
             this.size--;
         }
 
